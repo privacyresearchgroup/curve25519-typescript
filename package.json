@@ -1,9 +1,20 @@
 {
   "name": "curve25519-typescript",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "author": "Rolfe Schmidt <rolfeschmidt@gmail.com>",
-  "license": "MIT",
+  "license": "MIT", "scripts": {
+    "test": "jest --config jestconfig.json",
+    "lint": "eslint -c .eslintrc.js  '**/*.ts'",
+    "format": "prettier '**/{*.{js?(on),ts?(x),md},.*.js?(on)}' --write --list-different --config prettier.config.js",
+    "prepare": "yarn run build",
+    "build": "tsc -d",
+    "prepublishOnly": "yarn run lint",
+    "preversion": "yarn run lint && yarn test",
+    "version": "yarn run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^26.0.3",

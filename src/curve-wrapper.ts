@@ -8,10 +8,11 @@ interface CurveModule extends EmscriptenModule {
     _curve25519_sign(signature_ptr: number, privateKey_ptr: number, message_ptr: number, message_len: number): number
     _curve25519_verify(signature_ptr: number, privateKey_ptr: number, message_ptr: number, message_len: number): number
 }
+const instancePromise = factory()
 
 export class Curve25519Wrapper {
     static async create(): Promise<Curve25519Wrapper> {
-        const instance = await factory()
+        const instance = await instancePromise
         return new Curve25519Wrapper(instance)
     }
 
@@ -145,5 +146,26 @@ export class Curve25519Wrapper {
      */
     signatureIsValid(pubKey: ArrayBuffer, message: ArrayBuffer, sig: ArrayBuffer): boolean {
         return !this.verify(pubKey, message, sig)
+    }
+}
+
+export class AsyncCurve25519Wrapper {
+    curvePromise: Promise<Curve25519Wrapper>
+    constructor() {
+        this.curvePromise = Curve25519Wrapper.create()
+    }
+
+    async keyPair(privKey: ArrayBuffer): Promise<KeyPair> {
+        return (await curvePromise).keyPair(privKey)
+    }
+
+    async sharedSecret(pubKey: ArrayBuffer, privKey: ArrayBuffer): Promise<ArrayBuffer> {
+        return (await curvePromise).sharedSecret(pubKey, privKey)
+    }
+    async sign(privKey: ArrayBuffer, message: ArrayBuffer): Promise<ArrayBuffer> {
+        return (await curvePromise).sign(privKey, message)
+    }
+    async verify(pubKey: ArrayBuffer, message: ArrayBuffer, sig: ArrayBuffer): Promise<boolean> {
+        return (await curvePromise).verify(pubKey, message, sig)
     }
 }

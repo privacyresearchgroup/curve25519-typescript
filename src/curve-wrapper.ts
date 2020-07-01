@@ -156,16 +156,16 @@ export class AsyncCurve25519Wrapper {
     }
 
     async keyPair(privKey: ArrayBuffer): Promise<KeyPair> {
-        return (await curvePromise).keyPair(privKey)
+        return (await this.curvePromise).keyPair(privKey)
     }
 
     async sharedSecret(pubKey: ArrayBuffer, privKey: ArrayBuffer): Promise<ArrayBuffer> {
-        return (await curvePromise).sharedSecret(pubKey, privKey)
+        return (await this.curvePromise).sharedSecret(pubKey, privKey)
     }
     async sign(privKey: ArrayBuffer, message: ArrayBuffer): Promise<ArrayBuffer> {
-        return (await curvePromise).sign(privKey, message)
+        return (await this.curvePromise).sign(privKey, message)
     }
     async verify(pubKey: ArrayBuffer, message: ArrayBuffer, sig: ArrayBuffer): Promise<boolean> {
-        return (await curvePromise).verify(pubKey, message, sig)
+        return (await this.curvePromise).verify(pubKey, message, sig)
     }
 }

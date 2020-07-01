@@ -6,6 +6,7 @@ import { KeyPair } from './types'
 interface CurveModule extends EmscriptenModule {
     _curve25519_donna(mypublic_ptr: number, secret_ptr: number, basepoint_ptr: number): number
     _curve25519_sign(signature_ptr: number, privateKey_ptr: number, message_ptr: number, message_len: number): number
+    _curve25519_verify(signature_ptr: number, privateKey_ptr: number, message_ptr: number, message_len: number): number
 }
 
 export class Curve25519Wrapper {
@@ -90,6 +91,7 @@ export class Curve25519Wrapper {
 
         return res.buffer
     }
+
     sign(privKey: ArrayBuffer, message: ArrayBuffer): ArrayBuffer {
         // Where to store the result
         const signature_ptr = this._module._malloc(64)
@@ -110,5 +112,38 @@ export class Curve25519Wrapper {
         this._module._free(message_ptr)
 
         return res.buffer
+    }
+
+    verify(pubKey: ArrayBuffer, message: ArrayBuffer, sig: ArrayBuffer): boolean {
+        // Get a pointer to their public key
+        const publicKey_ptr = this._allocate(new Uint8Array(pubKey))
+
+        // Get a pointer to the signature
+        const signature_ptr = this._allocate(new Uint8Array(sig))
+
+        // Get a pointer to the message
+        const message_ptr = this._allocate(new Uint8Array(message))
+
+        const res = this._module._curve25519_verify(signature_ptr, publicKey_ptr, message_ptr, message.byteLength)
+
+        this._module._free(publicKey_ptr)
+        this._module._free(signature_ptr)
+        this._module._free(message_ptr)
+
+        console.log({ res })
+
+        return res !== 0
+    }
+
+    /**
+     * Syntactic sugar for verify with explicit semantics.  The fact that verify returns true when
+     * a signature is invalid could be confusing. The meaning of this function should be clear.
+     *
+     * @param pubKey
+     * @param message
+     * @param sig
+     */
+    signatureIsValid(pubKey: ArrayBuffer, message: ArrayBuffer, sig: ArrayBuffer): boolean {
+        return !this.verify(pubKey, message, sig)
     }
 }

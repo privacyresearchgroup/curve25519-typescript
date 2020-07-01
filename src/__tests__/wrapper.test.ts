@@ -51,7 +51,7 @@ test('Ed25519Sign', async () => {
 
 test('Ed25519Verify rejects bad signature', async () => {
     const curve = await Curve25519Wrapper.create()
-    const badsig = sig.slice(0)
+    const badsig = sig.slice(1)
     new Uint8Array(badsig).set([0], 0)
 
     expect(curve.verify(pub, msg, badsig)).toBe(true)

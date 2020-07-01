@@ -5,6 +5,7 @@ import { KeyPair } from './types'
 
 interface CurveModule extends EmscriptenModule {
     _curve25519_donna(mypublic_ptr: number, secret_ptr: number, basepoint_ptr: number): number
+    _curve25519_sign(signature_ptr: number, privateKey_ptr: number, message_ptr: number, message_len: number): number
 }
 
 export class Curve25519Wrapper {
@@ -86,6 +87,27 @@ export class Curve25519Wrapper {
         this._module._free(sharedKey_ptr)
         this._module._free(privateKey_ptr)
         this._module._free(basepoint_ptr)
+
+        return res.buffer
+    }
+    sign(privKey: ArrayBuffer, message: ArrayBuffer): ArrayBuffer {
+        // Where to store the result
+        const signature_ptr = this._module._malloc(64)
+
+        // Get a pointer to our private key
+        const privateKey_ptr = this._allocate(new Uint8Array(privKey))
+
+        // Get a pointer to the message
+        const message_ptr = this._allocate(new Uint8Array(message))
+
+        this._module._curve25519_sign(signature_ptr, privateKey_ptr, message_ptr, message.byteLength)
+
+        const res = new Uint8Array(64)
+        this._readBytes(signature_ptr, 64, res)
+
+        this._module._free(signature_ptr)
+        this._module._free(privateKey_ptr)
+        this._module._free(message_ptr)
 
         return res.buffer
     }

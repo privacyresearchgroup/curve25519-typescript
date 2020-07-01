@@ -35,3 +35,16 @@ test(`generate key pair`, async () => {
     expect(Buffer.from(aliceSecret).toString('hex')).toBe(shared_sec)
     expect(Buffer.from(bobSecret).toString('hex')).toBe(shared_sec)
 })
+
+const priv = hexToArrayBuffer('48a8892cc4e49124b7b57d94fa15becfce071830d6449004685e387c62409973')
+const pub = hexToArrayBuffer('0555f1bfede27b6a03e0dd389478ffb01462e5c52dbbac32cf870f00af1ed9af3a')
+const msg = hexToArrayBuffer('617364666173646661736466')
+const sig = hexToArrayBuffer(
+    '2bc06c745acb8bae10fbc607ee306084d0c28e2b3bb819133392473431291fd0dfa9c7f11479996cf520730d2901267387e08d85bbf2af941590e3035a545285'
+)
+test('Ed25519Sign', async () => {
+    const curve = await Curve25519Wrapper.create()
+    // Some self-generated test vectors
+    const sigCalc = curve.sign(priv, msg)
+    expect(Buffer.from(sigCalc).toString('hex')).toBe(Buffer.from(sig).toString('hex'))
+})

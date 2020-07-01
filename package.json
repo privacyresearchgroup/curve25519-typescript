@@ -1,10 +1,11 @@
 {
-  "name": "curve25519-typescript",
-  "version": "0.0.1",
+  "name": "@rolfe/curve25519-typescript",
+  "version": "0.0.2",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "repository": "https://github.com/privacyresearchgroup/curve25519-typescript",
   "author": "Rolfe Schmidt <rolfeschmidt@gmail.com>",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "lint": "eslint -c .eslintrc.js  '**/*.ts'",

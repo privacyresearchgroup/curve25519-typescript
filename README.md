@@ -60,6 +60,9 @@ if (!signatureIsValid) {
 }
 ```
 
+That pretty much covers it, but look at the [tests](https://github.com/privacyresearchgroup/curve25519-typescript/tree/master/src/__tests__) for details about
+creating ArrayBuffers for input and getting some sample data to get started.
+
 ### Async or not Async?
 
 In the installation instructions we noted that the package exports two classes: `Curve25519Wrapper` and `AsyncCurve25519Wrapper`. The examples above

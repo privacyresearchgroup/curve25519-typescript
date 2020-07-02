@@ -10,7 +10,7 @@
   "scripts": {
     "test": "jest --config jestconfig.json",
     "lint": "eslint -c .eslintrc.js  '**/*.ts'",
-    "format": "prettier '**/{*.{js?(on),ts?(x),md},.*.js?(on)}' --write --list-different --config prettier.config.js",
+    "format": "prettier '{*.{js?(on),ts?(x),md}, src/__tests__/*.{js?(on),ts?(x),md}, src/*.{js?(on),ts?(x),md}}' --write --list-different --config prettier.config.js",
     "prepare": "yarn run build",
     "build": "tsc -d --diagnostics --disableSizeLimit",
     "diagnose": "tsc --noEmit --diagnostics --incremental false",

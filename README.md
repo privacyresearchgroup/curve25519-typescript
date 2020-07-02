@@ -23,7 +23,7 @@ We'll say more about the differences between the two curve wrappers below.
 
 ## Usage
 
-Before getting into the details, here's a quick example of a Diffiee-Hellman key exchange
+Before getting into the details, here's a quick example of a Diffie-Hellman key exchange (not that you would ever do both key computations in one place!):
 
 ```typescript
 const curve = await Curve25519Wrapper.create()

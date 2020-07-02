@@ -1,6 +1,6 @@
 {
   "name": "@rolfe/curve25519-typescript",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "repository": "https://github.com/privacyresearchgroup/curve25519-typescript",

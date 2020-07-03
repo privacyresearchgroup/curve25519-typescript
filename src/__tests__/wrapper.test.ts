@@ -1,3 +1,12 @@
+/*
+ * Created April 2020
+ *
+ * Copyright (c) 2020 Privacy Research, LLC
+ *
+ *  Licensed under GPL v3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
+ *
+ */
+
 import { Curve25519Wrapper } from '../curve-wrapper'
 
 const alice_bytes = hexToArrayBuffer('77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a')

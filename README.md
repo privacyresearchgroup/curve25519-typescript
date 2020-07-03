@@ -93,3 +93,9 @@ If you want to make modifications to the C code or change compilation arguments 
 ## Thanks!
 
 This is really just a direct lift of work done by the folks at [Signal](https://signal.org) so that we can use it easily in our TypeScript projects. Thanks to them for putting the core of this together!
+
+## License
+
+Copyright 2015-2018 Open Whisper Systems
+
+Licensed under the GPLv3: [http://www.gnu.org/licenses/gpl-3.0.html](http://www.gnu.org/licenses/gpl-3.0.html)

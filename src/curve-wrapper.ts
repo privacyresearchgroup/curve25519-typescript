@@ -140,8 +140,6 @@ export class Curve25519Wrapper {
         this._module._free(signature_ptr)
         this._module._free(message_ptr)
 
-        console.log({ res })
-
         return res !== 0
     }
 

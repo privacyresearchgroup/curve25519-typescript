@@ -1,5 +1,5 @@
 {
-  "name": "@rolfe/curve25519-typescript",
+  "name": "@privacyresearch/curve25519-typescript",
   "version": "0.0.6",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

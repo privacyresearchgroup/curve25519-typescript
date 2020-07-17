@@ -10,7 +10,7 @@
 /// <reference types="emscripten" />
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 import factory from './built/curveasm'
-import { KeyPair } from './types'
+import { KeyPair, Curve, AsyncCurve } from './types'
 
 interface CurveModule extends EmscriptenModule {
     _curve25519_donna(mypublic_ptr: number, secret_ptr: number, basepoint_ptr: number): number
@@ -19,7 +19,7 @@ interface CurveModule extends EmscriptenModule {
 }
 const instancePromise = factory()
 
-export class Curve25519Wrapper {
+export class Curve25519Wrapper implements Curve {
     static async create(): Promise<Curve25519Wrapper> {
         const instance = await instancePromise
         return new Curve25519Wrapper(instance)
@@ -156,7 +156,7 @@ export class Curve25519Wrapper {
     }
 }
 
-export class AsyncCurve25519Wrapper {
+export class AsyncCurve25519Wrapper implements AsyncCurve {
     curvePromise: Promise<Curve25519Wrapper>
     constructor() {
         this.curvePromise = Curve25519Wrapper.create()

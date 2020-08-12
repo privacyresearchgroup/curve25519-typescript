@@ -8,15 +8,15 @@ and exposes the basic functions in an easy to use TypeScript package.
 Use [yarn](https://yarnpkg.com/) to install:
 
 ```
-yarn add @rolfe/curve25519-typescript
+yarn add @privacyresearch/curve25519-typescript
 ```
 
 Then in your code simply import the class you want:
 
 ```typescript
-import { Curve25519Wrapper } from '@rolfe/curve25519-typescript'
+import { Curve25519Wrapper } from '@privacyresearch/curve25519-typescript'
 // OR...
-import { AsyncCurve25519Wrapper } from '@rolfe/curve25519-typescript'
+import { AsyncCurve25519Wrapper } from '@privacyresearch/curve25519-typescript'
 ```
 
 We'll say more about the differences between the two curve wrappers below.

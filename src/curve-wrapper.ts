@@ -8,7 +8,6 @@
  */
 
 /// <reference types="emscripten" />
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 import factory from './built/curveasm'
 import { KeyPair, Curve, AsyncCurve } from './types'
 
